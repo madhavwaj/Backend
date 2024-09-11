@@ -1,1 +1,37 @@
+import java.util.PriorityQueue;
+
+class Solution {
+    // Function to return the minimum cost of connecting the ropes.
+    public long minCost(long[] arr) {
+        // Create a min-heap (priority queue)
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+        
+        // Add all the ropes (lengths) to the heap
+        for (long length : arr) {
+            pq.add(length);
+        }
+        
+        // Initialize the total cost to 0
+        long totalCost = 0;
+        
+        // While there's more than one rope to connect
+        while (pq.size() > 1) {
+            // Extract the two smallest ropes
+            long first = pq.poll();
+            long second = pq.poll();
+            
+            // The cost to connect these two ropes is their sum
+            long cost = first + second;
+            
+            // Add the cost to the total cost
+            totalCost += cost;
+            
+            // Add the new combined rope back to the heap
+            pq.add(cost);
+        }
+        
+        // Return the total cost of connecting all the ropes
+        return totalCost;
+    }
+}
 
